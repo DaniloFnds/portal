@@ -1,0 +1,30 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar"
+            nzTheme="light"
+            nzCollapsible
+            nzWidth="256px"
+            nzBreakpoint="md"
+            [nzTrigger]="null">
+
+    <!--    HEADER MENU SIDEBAR-->
+    <main-menu-header></main-menu-header>
+    <!--    PROFILE HEADER MENU-->
+    <profile-menu></profile-menu>
+    <!--    MENU LISTA-->
+    <main-menu></main-menu>
+
+  </nz-sider>
+  <nz-layout>
+
+    <!--    HEADER CONTENT-->
+    <nz-header>
+      <content-header></content-header>
+    </nz-header>
+
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

@@ -1,0 +1,8 @@
+<nz-select nzShowSearch nzAllowClear nzPlaceHolder="Todos" [(ngModel)]="situacaoOperacao"  >
+  <nz-option *ngFor="let situacao of situacoesOperacao"
+             id="fundo"
+             nzLabel="{{situacao.label}}"
+             nzValue="{{situacao.value}}"
+            >
+  </nz-option>
+</nz-select>

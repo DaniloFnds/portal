@@ -1,0 +1,9 @@
+.layout-profile-menu-acoes {
+  height: 25px;
+  min-width: var(--layout-main-sidenav-width);
+  display: flex;
+  margin-bottom: 5px;
+  place-content: center space-around;
+  align-items: center;
+  box-sizing: border-box;
+}

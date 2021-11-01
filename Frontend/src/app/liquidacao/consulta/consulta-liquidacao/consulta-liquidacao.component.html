@@ -1,0 +1,60 @@
+<breadcrumb [breadcrumb]="breadcrumb"></breadcrumb>
+
+<form nz-form ngForm>
+  <nz-form-item>
+    <nz-form-label [nzSm]="2" nzFor="fundo">Fundo</nz-form-label>
+    <nz-form-control [nzSm]="5">
+      <fundo-drop-down [isObrigatorio]="false"></fundo-drop-down>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="2" nzFor="situacaoOperacao">Situação</nz-form-label>
+    <nz-form-control [nzSm]="5">
+      <situacao-drop-down></situacao-drop-down>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="2" nzFor="data" nzRequired>Data</nz-form-label>
+    <nz-form-control [nzSm]="5">
+      <nz-date-picker id="data" [(ngModel)]="dataSelecionada" [nzFormat]="dtFormat"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control [nzOffset]="2">
+      <button nz-button nzType="primary">Buscar</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<nz-table #basicTable [nzData]="operacoes">
+  <thead>
+  <tr>
+    <th>Fundo</th>
+    <th>Nome Arquivo</th>
+    <th>Cedente</th>
+    <th>Valor de Transfência</th>
+    <th>Valor TED Cedente</th>
+    <th>Situação</th>
+    <th>Cessão</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data" [routerLink]="['aprovar', data.id]">
+    <td>{{data.nomeFundo}}</td>
+    <td>{{data.nomeArquivo}}</td>
+    <td>{{data.nomeCedente}}</td>
+    <td>{{data.valorTransferencia}}</td>
+    <td>{{data.valorTed}}</td>
+    <td>{{data.situacao}}</td>
+
+    <td>
+      <a nz-icon [nzType]="'file-pdf'" ></a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+
+

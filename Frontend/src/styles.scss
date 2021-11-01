@@ -1,0 +1,18 @@
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.ant-menu-submenu-arrow {
+  color: var(--sinqia-primary-color) !important;
+}
+
+:root {
+  --layout-main-sidenav-width: 200px;
+  --layout-toolbar-height: 45px;
+  --layout-profile-menu-height: 120px;
+  --sinqia-primary-color: #fb4400;
+  --layout-header-mat-toolbar-height:56px
+
+}
+
+

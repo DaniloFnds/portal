@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: operacao-service
+  config:
+    import: optional:configserver:http://dhan.com.br:8888
+  cloud:
+    config:
+      name: portal-config-server
+      profile: danilo
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://dhan.com.br:9000/eureka
+server:
+  port: 9097

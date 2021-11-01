@@ -1,0 +1,8 @@
+<nz-select nzShowSearch nzAllowClear nzPlaceHolder="{{isObrigatorio ? 'Selecione um Fundo' : 'Todos'}}" [(ngModel)]="fundoSelecionado"  >
+  <nz-option *ngFor="let fundo of fundos"
+             id="fundo"
+             nzLabel="{{fundo.label}}"
+             nzValue="{{fundo.value}}"
+              >
+  </nz-option>
+</nz-select>

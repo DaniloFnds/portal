@@ -1,0 +1,20 @@
+server:
+  port: 8888
+
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      server:
+        git:
+          uri: https://github.com/DaniloFnds/config-server.git
+          clone-on-start: true
+          default-label: main
+  application:
+    name: portal-config-server
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER}

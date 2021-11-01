@@ -1,0 +1,18 @@
+version: "3.5"
+
+services:
+  cassandra:
+    image: cassandra:3.11.10   # better to use a specific version, if you want to control upgrades
+    container_name: cassandra
+    ports:
+      - "9042:9042"  # Expose native binary CQL port for your apps
+    environment:
+      - "MAX_HEAP_SIZE=256M"
+      - "HEAP_NEWSIZE=128M"
+    volumes:
+      - ./data/cass1:/var/lib/cassandra    # This is the volume that will persist data for cass1 node
+    healthcheck:
+      test: [ "CMD", "cqlsh", "-e", "describe keyspaces" ]
+      interval: 5s
+      timeout: 5s
+      retries: 60

@@ -11,6 +11,7 @@ import java.util.UUID;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SendEventValidacaoArquivoImpl implements SendEventValidacaoArquivo {
 
+
     @Override
     public void send(UUID idArquivoValidacao) {
 

@@ -1,4 +1,4 @@
-package br.com.dhan.endpoints.models;
+package br.com.dhan.feign.models;
 
 public record RetornoInvalido (String motivo) {
 }

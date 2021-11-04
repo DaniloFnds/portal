@@ -1,8 +1,7 @@
-package br.com.dhan.endpoints;
+package br.com.dhan.feign.endpoints;
 
 import br.com.dhan.configurer.FeignConfiguer;
-import br.com.dhan.endpoints.models.RetornoInvalido;
-import com.google.gson.Gson;
+import br.com.dhan.feign.models.RetornoInvalido;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;

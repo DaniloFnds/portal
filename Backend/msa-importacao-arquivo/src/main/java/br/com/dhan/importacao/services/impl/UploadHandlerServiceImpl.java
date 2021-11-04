@@ -1,11 +1,10 @@
 package br.com.dhan.importacao.services.impl;
 
-import br.com.dhan.endpoints.models.RetornoInvalido;
 import br.com.dhan.entity.ImportacaoArquivoEntity;
+import br.com.dhan.feign.endpoints.ArquivoServiceEndpoint;
+import br.com.dhan.feign.models.RetornoInvalido;
 import br.com.dhan.importacao.services.UploadHandlerService;
-import br.com.dhan.endpoints.ArquivoServiceEndpoint;
 import br.com.dhan.repositories.ImportacaoArquivoRepository;
-import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -5,4 +5,7 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 100MB
       max-request-size: 200MB
+feign:
+  circuitbreaker:
+    enabled: true
 

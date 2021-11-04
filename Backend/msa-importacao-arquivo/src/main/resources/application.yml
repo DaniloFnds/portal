@@ -1,0 +1,9 @@
+feign:
+  circuitbreaker:
+    enabled: true
+management:
+  endpoint:
+    health:
+      enabled:
+      show-details: always
+

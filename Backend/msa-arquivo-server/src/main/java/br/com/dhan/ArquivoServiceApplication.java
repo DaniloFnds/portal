@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @SpringBootApplication
         (exclude = {DataSourceAutoConfiguration.class})

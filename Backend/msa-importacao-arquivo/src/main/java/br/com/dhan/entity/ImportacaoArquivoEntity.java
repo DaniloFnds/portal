@@ -22,4 +22,7 @@ public class ImportacaoArquivoEntity implements Serializable {
     @Column("nome_arquivo")
     private String nomeArquivo;
 
+    @Column("status")
+    private String status;
+
 }

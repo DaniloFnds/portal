@@ -4,7 +4,6 @@ server:
 eureka:
   client:
     fetch-registry: true
-    register-with-eureka: true
 
 spring:
   application:
@@ -26,10 +25,11 @@ spring:
           uri: http://localhost:${OPERACAO_SERVICE_PORT}
           predicates:
             - Path=/operacao/**
+          filters:
+            - StripPrefix=1
     config:
       enabled: true
       name: portal-config-server
-
 #
 #                   spring:
 #                     application:
@@ -60,3 +60,6 @@ spring:
 #logging:
 #  level:
 #    root: trace
+logging:
+  level:
+    root: debug

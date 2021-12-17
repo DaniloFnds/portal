@@ -31,7 +31,6 @@
         <module>msa-eureka-server</module>
         <module>msa-importacao-arquivo</module>
         <module>msa-operacao</module>
-        <module>sc-operacao</module>
         <module>services-commons</module>
         <module>services-configurer</module>
     </modules>

@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 public class PropertiesResolver {
 
-    @Value("${STORAGE_PATH_IMPORTACAO_ARQUIVO}")
-    private String PATH_STORAGE_FILE_IMPORTACAO;
+//    @Value("${STORAGE_PATH_IMPORTACAO_ARQUIVO}")
+//    private String PATH_STORAGE_FILE_IMPORTACAO;
 }

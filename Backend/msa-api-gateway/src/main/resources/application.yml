@@ -1,0 +1,62 @@
+server:
+  port: 8000
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      #          lower-case-service-id: true
+      routes:
+        - id: importacao_arquivo_service
+          uri: lb://importacao-arquivo-service
+          predicates:
+            - Path=/importacao-arquivo/**
+          filters:
+            - StripPrefix=1
+        - id: operacao_service
+          uri: http://localhost:${OPERACAO_SERVICE_PORT}
+          predicates:
+            - Path=/operacao/**
+    config:
+      enabled: true
+      name: portal-config-server
+
+#
+#                   spring:
+#                     application:
+#                       name: gateway-service
+#                     cloud:
+#                       gateway:
+#                         routes:
+#                           - id: employeeModule
+#                             uri: lb://FIRST-SERVICE
+#                             predicates:
+#                               - Path=/employee/**
+#                           - id: consumerModule
+#                             uri: lb://SECOND-SERVICE
+#                             predicates:
+#                               - Path=/consumer/**
+
+
+#
+#zuul:
+#  prefix: /api #Configura para que o contexto de entrada seja no /api, assim todos os serviços vão ser acessados pela URI /api;
+#  routes:
+#    importacao-arquivo-service: #
+#      path: /importacao-arquivo/** #Define a URI para acessar os dados de customer, no caso /api/customers;
+#      url: forward:/importacao-arquivo
+#      serviceId: importacao-arquivo-service #Informa o ID da aplicação registrada no Eureka, que é o valor atribuído em cada aplicação na propriedade spring.application.name do application.properties;
+#      strip-prefix: false #Configurado com false, o prefixo do serviço configurado no path não tera nenhum efeito no path original da sua chamada, assim quando requisitado /api/importacao-arquivo será redirecionado para /importacao-arquivo.
+#  ignored-services: '*'  #Quando configurado como ‘*’, todos os serviços são ignorados por padrão, assim nenhum serviço vai ser acessado pelo Zuul, apenas vão estar disponível os que estiverem mapeados explícitamente
+#logging:
+#  level:
+#    root: trace

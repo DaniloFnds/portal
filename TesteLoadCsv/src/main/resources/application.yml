@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://192.168.15.46:1433;databaseName=FIDC_PAULISTA_DEV
+    username: sa
+    password: fromtis!Q@W#E

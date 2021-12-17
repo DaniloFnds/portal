@@ -1,9 +1,10 @@
-feign:
-  circuitbreaker:
-    enabled: true
-management:
-  endpoint:
-    health:
-      enabled:
-      show-details: always
-
+spring:
+  application:
+    name: importacao-arquivo-service
+  #    http://dhan.com.br:8888
+  cloud:
+    config:
+      enabled: true
+      name: portal-config-server
+server:
+  port: 9898

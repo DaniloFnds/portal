@@ -29,7 +29,6 @@ public class OperacaoController {
     public ResponseEntity<List<OperacaoRecebivel>> consultarOperacoes() {
         List<OperacaoRecebivel> operacaoRecebivels = this.operacaoRecebivelRepository.findAll();
 
-
         ResponseEntity<String> forEntity = this.restTemplate.getForEntity("http://importacao-arquivo-service/api/v1/importacoes/arquivos", String.class);
         System.out.println(forEntity);
 

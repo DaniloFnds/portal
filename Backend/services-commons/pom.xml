@@ -18,6 +18,10 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>br.com.dhan</groupId>
+            <artifactId>services-configurer</artifactId>
+        </dependency>
 
     </dependencies>
 

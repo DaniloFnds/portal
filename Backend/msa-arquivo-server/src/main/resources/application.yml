@@ -5,7 +5,21 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 100MB
       max-request-size: 200MB
-feign:
-  circuitbreaker:
-    enabled: true
+
+  application:
+    name: arquivo-service
+  #    http://dhan.com.br:8888
+  cloud:
+    config:
+      enabled: true
+      name: portal-config-server
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+#      http://dhan.com.br:9000/eureka
+
+server:
+  port: 9098
 

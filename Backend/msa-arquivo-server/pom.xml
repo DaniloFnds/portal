@@ -14,7 +14,6 @@
     <description>Servico de download e upload de arquivos importados</description>
 
     <dependencies>
-
         <dependency>
             <groupId>br.com.dhan</groupId>
             <artifactId>services-configurer</artifactId>

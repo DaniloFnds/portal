@@ -3,7 +3,7 @@ package banco
 import (
 	"github.com/gocql/gocql"
 	"log"
-	"msa-config-go/config"
+	"msa-operacao/config"
 	"time"
 )
 

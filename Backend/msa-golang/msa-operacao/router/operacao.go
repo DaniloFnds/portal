@@ -1,12 +1,12 @@
 package router
 
 import (
-	"msa-config-go/router"
+	"msa-operacao/config"
 	"msa-operacao/controllers"
 	"net/http"
 )
 
-var OperacaoRotas = []router.Rota{
+var OperacaoRotas = []config.Rota{
 	{
 		URI:                "/operacao",
 		Metodo:             http.MethodGet,

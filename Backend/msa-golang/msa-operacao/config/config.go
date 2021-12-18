@@ -5,7 +5,6 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"log"
-	"msa-config-go/router"
 	"net/http"
 	"os"
 	"strconv"
@@ -42,7 +41,7 @@ func carregarEnvConfig() {
 }
 
 // BootConfig Metodo para inicializar todos config init
-func BootConfig(rotas []router.Rota) *mux.Router {
+func BootConfig(rotas []Rota) *mux.Router {
 	log.Println("Iniciando carregamento as variaveis de Config")
 	carregarEnvConfig()
 
@@ -50,11 +49,11 @@ func BootConfig(rotas []router.Rota) *mux.Router {
 	rotas = append(rotas, incluirRotaHealth())
 
 	log.Println("Carregando Rotas")
-	return router.ConfigurarRotas(gerarRouterMux(), rotas)
+	return ConfigurarRotas(gerarRouterMux(), rotas)
 }
 
-func incluirRotaHealth() router.Rota {
-	return router.Rota{
+func incluirRotaHealth() Rota {
+	return Rota{
 		URI: "/health",
 		Funcao: func(w http.ResponseWriter, r *http.Request) {
 			log.Println("Health Requested")

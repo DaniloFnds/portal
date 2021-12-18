@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
-	"msa-config-go/config"
+	"msa-operacao/config"
 	"msa-operacao/router"
 	"net/http"
 	"os"

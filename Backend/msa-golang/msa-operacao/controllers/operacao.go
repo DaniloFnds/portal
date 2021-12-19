@@ -3,13 +3,16 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
+	"github.com/gofiber/fiber"
 	"github.com/gorilla/mux"
+	"github.com/streadway/amqp"
 	"io/ioutil"
 	"log"
 	"msa-operacao/config"
 	"msa-operacao/handler"
 	"msa-operacao/repositorio"
 	"net/http"
+	"os"
 )
 
 //PegarOperacoes devolve todas as operacoes
@@ -74,5 +77,59 @@ func CriarOperacao(w http.ResponseWriter, r *http.Request) {
 
 //AprovarOperacao aprovar uma operacao
 func AprovarOperacao(w http.ResponseWriter, r *http.Request) {
+	amqpurl := os.Getenv("AMQP_SERVER_URL")
+	connectRabbit, err := amqp.Dial(amqpurl)
+	if err != nil {
+		panic(err)
+	}
+
+	defer connectRabbit.Close()
+
+	channel, err := connectRabbit.Channel()
+	if err != nil {
+		panic(err)
+	}
+
+	defer channel.Close()
+
+	_, err = channel.QueueDeclare(
+		"QueueService1",
+		true,
+		false,
+		false,
+		false,
+		nil,
+	)
+
+	if err != nil {
+		panic(err)
+	}
+
+	app := fiber.New()
+
+	/*	app.Use(
+		logger.New(),
+	)*/
+
+	app.Get("/send", func(ctx *fiber.Ctx) {
+		publishing := amqp.Publishing{
+			ContentType: "text/plain",
+			Body:        []byte(ctx.Query("ola mundo")),
+		}
+
+		err = channel.Publish(
+			"",
+			"QueueService1",
+			false,
+			false,
+			publishing,
+		)
+
+		if err != nil {
+			panic(err)
+		}
+	})
+
+	log.Fatal(app.Listen(":3000"))
 
 }

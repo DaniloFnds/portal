@@ -14,7 +14,17 @@ import (
 
 //PegarOperacoes devolve todas as operacoes
 func PegarOperacoes(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("ok"))
+	operacoes, err := new(repositorio.Operacao).FindAll(config.GetSession())
+	if operacoes == nil {
+		w.WriteHeader(http.StatusNoContent)
+		return
+	}
+
+	if err != nil {
+		handler.Error(w, http.StatusInternalServerError, err)
+		return
+	}
+	handler.JSON(w, http.StatusOK, operacoes)
 }
 
 //PegarUmaOperacao devolve uma operacao

@@ -55,6 +55,7 @@ func CriarOperacao(w http.ResponseWriter, r *http.Request) {
 		handler.Error(w, http.StatusInternalServerError, err)
 		return
 	}
+
 	operacao := new(repositorio.Operacao)
 	err = json.Unmarshal(payload, operacao)
 	if err != nil {
@@ -69,4 +70,9 @@ func CriarOperacao(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusCreated)
+}
+
+//AprovarOperacao aprovar uma operacao
+func AprovarOperacao(w http.ResponseWriter, r *http.Request) {
+
 }

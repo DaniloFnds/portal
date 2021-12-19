@@ -25,4 +25,10 @@ var OperacaoRotas = []config.Rota{
 		Funcao:             controllers.CriarOperacao,
 		RequerAutenticacao: false,
 	},
+	{
+		URI:                "/operacoes/{id-operacao}/aprovar",
+		Metodo:             http.MethodPost,
+		Funcao:             controllers.AprovarOperacao,
+		RequerAutenticacao: false,
+	},
 }

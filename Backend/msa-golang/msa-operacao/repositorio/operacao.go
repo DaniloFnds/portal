@@ -6,18 +6,18 @@ import (
 )
 
 type Operacao struct {
-	Id                 gocql.UUID `json:"id,omitempty"`
-	NomeFundo          string     `json:"nomeFundo,omitempty"`
-	NomeArquivo        string     `json:"nomeArquivo,omitempty"`
-	NomeCedente        string     `json:"nomeCedente,omitempty"`
-	ValorTransferencia float64    `json:"valorTransferencia,omitempty"`
-	ValorTed           float64    `json:"valorTed,omitempty"`
-	Situacao           string     `json:"situacao,omitempty"`
+	Id                 string  `json:"id,omitempty"`
+	NomeFundo          string  `json:"nomeFundo,omitempty"`
+	NomeArquivo        string  `json:"nomeArquivo,omitempty"`
+	NomeCedente        string  `json:"nomeCedente,omitempty"`
+	ValorTransferencia float64 `json:"valorTransferencia,omitempty"`
+	ValorTed           float64 `json:"valorTed,omitempty"`
+	Situacao           string  `json:"situacao,omitempty"`
 }
 
 func (operacao *Operacao) GetOne(session *gocql.Session, id string) (*Operacao, error) {
 
-	var idOperacao gocql.UUID
+	var idOperacao string
 	var nomeFundo string
 	var nomeArquivo string
 	var nomeCedente string
@@ -27,18 +27,46 @@ func (operacao *Operacao) GetOne(session *gocql.Session, id string) (*Operacao, 
 
 	uuid, err := gocql.ParseUUID(id)
 	if err != nil {
-		return nil, err
+		return nil, errors.New("Erro ao converter para UUID")
 	}
 
 	if uuid.Timestamp() == 0 {
 		return nil, errors.New("Invalid UUID")
 	}
 
-	if err = session.Query(`SELECT id, nome_fundo, nome_arquivo, nome_cedente, valor_transferencia, valor_ted, situacao WHERE id = ?`,
+	if err := session.Query(`SELECT id, nome_fundo, nome_arquivo, nome_cedente, valor_transferencia, valor_ted, situacao WHERE id = ?`,
 		uuid).Consistency(gocql.One).Scan(&idOperacao, &nomeFundo, &nomeArquivo, &nomeCedente, &valorTransferencia, &valorTed, &situacao); err != nil {
 		return nil, err
 	}
 
 	return &Operacao{idOperacao, nomeFundo, nomeArquivo,
 		nomeCedente, valorTransferencia, valorTed, situacao}, nil
+}
+
+func (operacao *Operacao) Save(session *gocql.Session) error {
+	if operacao.Id != "" {
+		existeOperacao, err := operacao.GetOne(session, operacao.Id)
+		if err != nil {
+			return err
+		}
+
+		if existeOperacao.NomeArquivo != "" {
+			return errors.New("operação passada com ID e já existe uma operacao")
+		}
+	}
+
+	uuid, err := gocql.RandomUUID()
+	if err != nil {
+		return err
+	}
+
+	err = session.Query(`insert into operacao_recebivel (id, nome_arquivo, nome_cedente, nome_fundo, situacao, valor_ted, valor_transferencia)
+					VALUES ( ?, ?, ?, ?, ?, ?, ?)`,
+		uuid, operacao.NomeArquivo, operacao.NomeCedente, operacao.NomeFundo, "AGUARDANDO_APROVACAO_CONSULTORIA", operacao.ValorTed, operacao.ValorTransferencia).Exec()
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

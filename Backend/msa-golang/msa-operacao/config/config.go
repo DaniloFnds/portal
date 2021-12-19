@@ -2,6 +2,7 @@ package config
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"log"
@@ -44,6 +45,8 @@ func carregarEnvConfig() {
 func BootConfig(rotas []Rota) *mux.Router {
 	log.Println("Iniciando carregamento as variaveis de Config")
 	carregarEnvConfig()
+
+	fmt.Println("Tentando abrir Session com o banco", GetSession())
 
 	log.Println("Incluindo rota de heapth-api")
 	rotas = append(rotas, incluirRotaHealth())

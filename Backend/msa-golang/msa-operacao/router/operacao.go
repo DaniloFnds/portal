@@ -8,9 +8,21 @@ import (
 
 var OperacaoRotas = []config.Rota{
 	{
-		URI:                "/operacao",
+		URI:                "/operacoes",
+		Metodo:             http.MethodGet,
+		Funcao:             controllers.PegarOperacoes,
+		RequerAutenticacao: false,
+	},
+	{
+		URI:                "/operacoes/{id-operacao}",
 		Metodo:             http.MethodGet,
 		Funcao:             controllers.PegarUmaOperacao,
+		RequerAutenticacao: false,
+	},
+	{
+		URI:                "/operacoes",
+		Metodo:             http.MethodPost,
+		Funcao:             controllers.CriarOperacao,
 		RequerAutenticacao: false,
 	},
 }

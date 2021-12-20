@@ -30,10 +30,6 @@ func (operacao *Operacao) GetOne(session *gocql.Session, id string) (*Operacao, 
 		return nil, errors.New("Erro ao converter para UUID")
 	}
 
-	if uuid.Timestamp() == 0 {
-		return nil, errors.New("Invalid UUID")
-	}
-
 	if err := session.Query(`SELECT id, nome_fundo, nome_arquivo, nome_cedente, valor_transferencia, valor_ted, situacao FROM operacao_recebivel WHERE id = ?`,
 		uuid).Consistency(gocql.One).Scan(&idOperacao, &nomeFundo, &nomeArquivo, &nomeCedente, &valorTransferencia, &valorTed, &situacao); err != nil {
 		return nil, err

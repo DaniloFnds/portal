@@ -46,7 +46,8 @@ func BootConfig(rotas []Rota) *mux.Router {
 	log.Println("Iniciando carregamento as variaveis de Config")
 	carregarEnvConfig()
 
-	fmt.Println("Tentando abrir Session com o banco", GetSession())
+	fmt.Println("Tentando abrir Session com o banco")
+	GetSession()
 
 	log.Println("Incluindo rota de heapth-api")
 	rotas = append(rotas, incluirRotaHealth())

@@ -15,6 +15,10 @@ type Operacao struct {
 	Situacao           string  `json:"situacao,omitempty"`
 }
 
+func (operacao *Operacao) GetId() string {
+	return operacao.Id
+}
+
 func (operacao *Operacao) GetOne(session *gocql.Session, id string) (*Operacao, error) {
 
 	var idOperacao string

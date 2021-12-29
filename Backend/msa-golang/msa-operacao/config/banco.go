@@ -3,6 +3,8 @@ package config
 import (
 	"github.com/gocql/gocql"
 	"log"
+	"os"
+	"strconv"
 	"time"
 )
 
@@ -16,7 +18,19 @@ func GetSession() *gocql.Session {
 	cluster.Keyspace = DbCassandraKeySpace
 	session, err := cluster.CreateSession()
 	if err != nil {
-		log.Fatal(err)
+		getenv := os.Getenv("SHOULD_ERROR_BY_CHECKING_CONNECTION_DB")
+		if getenv != "" {
+			ok, errParse := strconv.ParseBool(getenv)
+			if errParse == nil {
+				if ok {
+					log.Fatal(err)
+				} else {
+					log.Println("Ocorreu erro ao conectar ao banco de dados")
+				}
+			} else {
+				log.Println(errParse)
+			}
+		}
 	}
 
 	return session

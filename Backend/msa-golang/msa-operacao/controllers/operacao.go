@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"msa-operacao/config"
+	"msa-operacao/domain"
 	"msa-operacao/handler"
 	"msa-operacao/publisher"
 	"msa-operacao/repositorio"
@@ -15,7 +16,7 @@ import (
 
 //PegarOperacoes devolve todas as operacoes
 func PegarOperacoes(w http.ResponseWriter, r *http.Request) {
-	operacoes, err := new(repositorio.Operacao).FindAll(config.GetSession())
+	operacoes, err := repositorio.FindAll(config.GetSession())
 	if operacoes == nil {
 		w.WriteHeader(http.StatusNoContent)
 		return
@@ -39,7 +40,7 @@ func PegarUmaOperacao(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	operacao, err := new(repositorio.Operacao).GetOne(config.GetSession(), idOperacao)
+	operacao, err := repositorio.GetOne(config.GetSession(), idOperacao)
 
 	if err != nil {
 		handler.Error(w, http.StatusInternalServerError, err)
@@ -57,14 +58,14 @@ func CriarOperacao(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	operacao := new(repositorio.Operacao)
+	operacao := new(domain.Operacao)
 	err = json.Unmarshal(payload, operacao)
 	if err != nil {
 		handler.Error(w, http.StatusBadRequest, err)
 		return
 	}
 
-	err = operacao.Save(config.GetSession())
+	err = repositorio.Save(config.GetSession(), operacao)
 
 	if err != nil {
 		handler.Error(w, http.StatusInternalServerError, err)
@@ -79,7 +80,7 @@ func AprovarOperacao(w http.ResponseWriter, r *http.Request) {
 
 	idOperacao := vars["id-operacao"]
 
-	operacao, err := new(repositorio.Operacao).GetOne(config.GetSession(), idOperacao)
+	operacao, err := repositorio.GetOne(config.GetSession(), idOperacao)
 
 	if err != nil {
 		handler.Error(w, http.StatusInternalServerError, err)

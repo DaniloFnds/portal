@@ -3,23 +3,10 @@ package repositorio
 import (
 	"errors"
 	"github.com/gocql/gocql"
+	"msa-operacao/domain"
 )
 
-type Operacao struct {
-	Id                 string  `json:"id,omitempty"`
-	NomeFundo          string  `json:"nomeFundo,omitempty"`
-	NomeArquivo        string  `json:"nomeArquivo,omitempty"`
-	NomeCedente        string  `json:"nomeCedente,omitempty"`
-	ValorTransferencia float64 `json:"valorTransferencia,omitempty"`
-	ValorTed           float64 `json:"valorTed,omitempty"`
-	Situacao           string  `json:"situacao,omitempty"`
-}
-
-func (operacao *Operacao) GetId() string {
-	return operacao.Id
-}
-
-func (operacao *Operacao) GetOne(session *gocql.Session, id string) (*Operacao, error) {
+func GetOne(session *gocql.Session, id string) (*domain.Operacao, error) {
 
 	var idOperacao string
 	var nomeFundo string
@@ -39,13 +26,13 @@ func (operacao *Operacao) GetOne(session *gocql.Session, id string) (*Operacao, 
 		return nil, err
 	}
 
-	return &Operacao{idOperacao, nomeFundo, nomeArquivo,
-		nomeCedente, valorTransferencia, valorTed, situacao}, nil
+	return &domain.Operacao{Id: idOperacao, NomeFundo: nomeFundo, NomeArquivo: nomeArquivo,
+		NomeCedente: nomeCedente, ValorTransferencia: valorTransferencia, ValorTed: valorTed, Situacao: situacao}, nil
 }
 
-func (operacao *Operacao) Save(session *gocql.Session) error {
+func Save(session *gocql.Session, operacao *domain.Operacao) error {
 	if operacao.Id != "" {
-		existeOperacao, err := operacao.GetOne(session, operacao.Id)
+		existeOperacao, err := GetOne(session, operacao.Id)
 		if err != nil {
 			return err
 		}
@@ -71,14 +58,14 @@ func (operacao *Operacao) Save(session *gocql.Session) error {
 	return nil
 }
 
-func (operacao *Operacao) FindAll(session *gocql.Session) ([]Operacao, error) {
+func FindAll(session *gocql.Session) ([]domain.Operacao, error) {
 	scanner := session.Query(`SELECT id, nome_arquivo, nome_cedente, nome_fundo, situacao, valor_ted, valor_transferencia
 										FROM operacao_recebivel`).Consistency(gocql.One).Iter().Scanner()
 
-	operacoes := make([]Operacao, 0)
+	operacoes := make([]domain.Operacao, 0)
 
 	for scanner.Next() {
-		var operacao = Operacao{}
+		var operacao = domain.Operacao{}
 		err := scanner.Scan(&operacao.Id, &operacao.NomeArquivo, &operacao.NomeCedente, &operacao.NomeFundo, &operacao.Situacao, &operacao.ValorTed, &operacao.ValorTransferencia)
 		if err != nil {
 			return nil, err

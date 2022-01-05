@@ -30,7 +30,7 @@
         <module>msa-config-server</module>
         <module>msa-eureka-server</module>
         <module>msa-importacao-arquivo</module>
-        <module>msa-operacao</module>
+        <module>msa-relatorios</module>
         <module>services-commons</module>
         <module>services-configurer</module>
     </modules>

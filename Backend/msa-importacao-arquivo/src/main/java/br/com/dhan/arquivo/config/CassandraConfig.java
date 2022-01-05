@@ -1,3 +1,4 @@
+/*
 package br.com.dhan.arquivo.config;
 
 import com.datastax.oss.driver.api.core.CqlSession;
@@ -76,4 +77,4 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
         return new CassandraTemplate(sessionFactory, converter);
     }
 
-}
+}*/

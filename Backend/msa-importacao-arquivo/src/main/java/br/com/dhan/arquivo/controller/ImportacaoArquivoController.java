@@ -2,14 +2,12 @@ package br.com.dhan.arquivo.controller;
 
 import br.com.dhan.arquivo.models.ImportacaoArquivoDto;
 import br.com.dhan.arquivo.services.ImportacaoArquivoService;
-import br.com.dhan.endpoints.OperacaoServiceEndpoint;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,10 +25,14 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RequestMapping(path = "/api/v1/importacoes/arquivos", produces = APPLICATION_JSON_VALUE)
 @CrossOrigin("*")
 @Slf4j
-@RequiredArgsConstructor
 public class ImportacaoArquivoController {
 
     private final ImportacaoArquivoService importacaoArquivoService;
+
+    @Autowired
+    public ImportacaoArquivoController(ImportacaoArquivoService importacaoArquivoService) {
+        this.importacaoArquivoService = importacaoArquivoService;
+    }
 
     @Operation(summary = "Carregar todas as importacos do usuário logado")
     @ApiResponses(value = {

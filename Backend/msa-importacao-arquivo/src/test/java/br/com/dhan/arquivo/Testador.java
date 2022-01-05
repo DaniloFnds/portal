@@ -3,6 +3,7 @@ package br.com.dhan.arquivo;
 import br.com.dhan.entity.ImportacaoArquivoEntity;
 import com.datastax.oss.driver.shaded.guava.common.collect.Lists;
 import org.modelmapper.ModelMapper;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.UUID;

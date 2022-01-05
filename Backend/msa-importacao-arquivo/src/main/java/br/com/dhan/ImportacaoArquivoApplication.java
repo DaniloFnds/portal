@@ -1,5 +1,6 @@
 package br.com.dhan;
 
+import br.com.dhan.configurer.CassandraConfig;
 import br.com.dhan.configurer.RootConfigurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +11,7 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
         (exclude = {DataSourceAutoConfiguration.class})
-@Import({RootConfigurer.class})
+@Import({RootConfigurer.class, CassandraConfig.class})
 @EnableEurekaClient
 @EnableFeignClients
 public class ImportacaoArquivoApplication {

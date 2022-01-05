@@ -8,3 +8,9 @@ spring:
       name: portal-config-server
 server:
   port: 9898
+
+
+portal:
+  cassandra:
+    key-space-name: ks_importacao_arquivo
+    contact-points: 172.30.87.52

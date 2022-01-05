@@ -9,8 +9,8 @@ import (
 	"msa-operacao/config"
 	"msa-operacao/domain"
 	"msa-operacao/handler"
-	"msa-operacao/publisher"
 	"msa-operacao/repositorio"
+	"msa-operacao/services"
 	"net/http"
 )
 
@@ -65,7 +65,7 @@ func CriarOperacao(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = repositorio.Save(config.GetSession(), operacao)
+	err = services.CriarOperacao(operacao)
 
 	if err != nil {
 		handler.Error(w, http.StatusInternalServerError, err)
@@ -80,24 +80,13 @@ func AprovarOperacao(w http.ResponseWriter, r *http.Request) {
 
 	idOperacao := vars["id-operacao"]
 
-	operacao, err := repositorio.GetOne(config.GetSession(), idOperacao)
+	ok, err := services.AprovarOperacao(idOperacao)
 
 	if err != nil {
 		handler.Error(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	payload, err := json.Marshal(operacao)
-
-	if err != nil {
-		handler.Error(w, http.StatusInternalServerError, err)
-		return
-	}
-
-	err = publisher.PublicarAprovacao(payload)
-
-	if err != nil {
-		handler.Error(w, http.StatusInternalServerError, err)
-	}
+	println("Aprovado com sucesso", ok)
 
 }

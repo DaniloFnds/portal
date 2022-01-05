@@ -20,8 +20,6 @@ import org.springframework.data.cassandra.core.mapping.SimpleUserTypeResolver;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 
 @Configuration
-@EnableCassandraRepositories(
-        basePackages = "br.com.dhan.repositories")
 @Slf4j
 public class CassandraConfig extends AbstractCassandraConfiguration {
 

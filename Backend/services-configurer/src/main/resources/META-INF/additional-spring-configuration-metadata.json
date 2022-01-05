@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "portal.cassandra.key-space-name",
+      "type": "java.lang.String",
+      "description": "Nome do Key-space criado no Cassandra."
+    },
+    {
+      "name": "portal.cassandra.contact-points",
+      "type": "java.lang.String",
+      "description": "Nome do Host do server do cassandra."
+    }
+  ]
+}

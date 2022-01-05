@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: relatorios
+  #    http://dhan.com.br:8888
+  cloud:
+    config:
+      enabled: true
+      name: portal-config-server
+server:
+  port: 9696
+
+portal:
+  cassandra:
+    key-space-name: ks_relatorios
+    contact-points: 172.30.87.52

@@ -33,6 +33,9 @@
         <module>msa-relatorios</module>
         <module>services-commons</module>
         <module>services-configurer</module>
+        <module>importacao-arquivo-api</module>
+        <module>importacao-arquivo-api/domain</module>
+        <module>importacao-arquivo-api/infra</module>
     </modules>
 
     <dependencies>

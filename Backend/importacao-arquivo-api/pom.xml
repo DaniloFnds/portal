@@ -7,6 +7,7 @@
         <groupId>br.com.dhan</groupId>
         <version>1.0</version>
     </parent>
+    <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>importacao-arquivo-api</artifactId>
@@ -15,5 +16,21 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>br.com.dhan</groupId>
+                <artifactId>importacao-arquivo-domain</artifactId>
+                <version>1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>infra</module>
+        <module>domain</module>
+    </modules>
+
 
 </project>

@@ -34,12 +34,21 @@
         <module>services-commons</module>
         <module>services-configurer</module>
         <module>importacao-arquivo-api</module>
-        <module>importacao-arquivo-api/domain</module>
-        <module>importacao-arquivo-api/infra</module>
     </modules>
 
     <dependencies>
+
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+        </dependency>
+
+        <!--<dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -92,7 +101,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 
@@ -135,6 +144,7 @@
                 <artifactId>lombok</artifactId>
                 <version>1.18.20</version>
                 <optional>true</optional>
+                <scope>provided</scope>
             </dependency>
 
             <!--            FRAMEWORK LIBS-->
